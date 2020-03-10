@@ -64,11 +64,11 @@ function (_React$Component) {
         var _response$data$items$ = response.data.items[0],
             login = _response$data$items$.login,
             avatar_url = _response$data$items$.avatar_url,
-            score = _response$data$items$.score;
+            id = _response$data$items$.id;
         var state = {
           login: login,
           avatar_url: avatar_url,
-          score: score,
+          id: id,
           click: false
         };
 
@@ -90,7 +90,7 @@ function (_React$Component) {
       username: "",
       login: "",
       avatar_url: "",
-      score: 0,
+      id: 0,
       click: true
     };
     return _this;
@@ -398,8 +398,8 @@ function (_React$Component3) {
           marginTop: "0"
         }
       };
-      console.log("first", first.score);
-      console.log("last", last.score);
+      console.log("first", first.id);
+      console.log("last", last.id);
 
       if (player == "BATTLE" || first.length == 0 || last.length == 0) {
         return _react.default.createElement("div", null, _react.default.createElement("div", null, _react.default.createElement(Instructions, null)), _react.default.createElement("div", {
@@ -436,7 +436,7 @@ function (_React$Component3) {
         }, player)));
       }
 
-      if (first.score > last.score) {
+      if (first.id > last.id) {
         return _react.default.createElement("div", {
           style: style.result
         }, _react.default.createElement("div", {
@@ -453,7 +453,7 @@ function (_React$Component3) {
           style: style.p
         }, first.login), _react.default.createElement("h4", {
           style: style.h
-        }, "score:", first.score)), _react.default.createElement("div", {
+        }, "score:", first.id)), _react.default.createElement("div", {
           style: style.resultCard
         }, _react.default.createElement("h3", null, "Loser"), _react.default.createElement("img", {
           src: last.avatar_url,
@@ -462,7 +462,7 @@ function (_React$Component3) {
           style: style.p
         }, last.login), _react.default.createElement("h4", {
           style: style.h
-        }, "score:", last.score))), _react.default.createElement("div", {
+        }, "score:", last.id))), _react.default.createElement("div", {
           style: style.btn
         }, _react.default.createElement("button", {
           style: style.b,
@@ -485,7 +485,7 @@ function (_React$Component3) {
           style: style.p
         }, last.login), _react.default.createElement("h4", {
           style: style.h
-        }, "score:", last.score)), _react.default.createElement("div", {
+        }, "score:", last.id)), _react.default.createElement("div", {
           style: style.resultCard
         }, _react.default.createElement("h3", null, "Loser"), _react.default.createElement("img", {
           src: first.avatar_url,
@@ -494,7 +494,7 @@ function (_React$Component3) {
           style: style.p
         }, first.login), _react.default.createElement("h4", {
           style: style.h
-        }, "score:", first.score))), _react.default.createElement("div", {
+        }, "score:", first.id))), _react.default.createElement("div", {
           style: style.btn
         }, _react.default.createElement("button", {
           style: style.b,
