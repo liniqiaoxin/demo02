@@ -200,17 +200,17 @@ function (_React$Component) {
         loader: null
       }, _react.default.createElement("div", {
         style: {
-          display: "flex",
-          justifyContent: "center"
+          display: 'flex',
+          justifyContent: 'center'
         }
       }, _react.default.createElement("div", {
         style: {
-          display: "flex",
+          display: 'flex',
           flexDirection: "row",
           flexWrap: "wrap",
           justifyContent: "space-around",
           marginBottom: "48px",
-          width: "990px"
+          width: '990px'
         }
       }, lists)), loading && _react.default.createElement("div", {
         style: {

@@ -29,10 +29,10 @@ _reactDom.default.render(_react.default.createElement(_reactRouterDom.HashRouter
   path: "/",
   component: _Pop.default
 }), _react.default.createElement(_reactRouterDom.Route, {
-  path: "/Battle",
+  path: "/Bat",
   component: _Bat.default
 }), _react.default.createElement(_reactRouterDom.Route, {
-  path: "/result",
+  path: "/Result",
   component: _Res.default
 }), _react.default.createElement(_reactRouterDom.Redirect, {
   to: "/"
