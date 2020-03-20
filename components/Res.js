@@ -209,8 +209,8 @@ exports.default = _default2;
     return;
   }
 
-  reactHotLoader.register(Res, "Res", "d:\\git\\demo02\\demo02\\src\\components\\Res.js");
-  reactHotLoader.register(_default, "default", "d:\\git\\demo02\\demo02\\src\\components\\Res.js");
+  reactHotLoader.register(Res, "Res", "D:\\git\\demo02\\demo02\\src\\components\\Res.js");
+  reactHotLoader.register(_default, "default", "D:\\git\\demo02\\demo02\\src\\components\\Res.js");
 })();
 
 ;

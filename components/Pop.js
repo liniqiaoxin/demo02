@@ -444,11 +444,11 @@ exports.default = _default2;
     return;
   }
 
-  reactHotLoader.register(Pop, "Pop", "d:\\git\\demo02\\demo02\\src\\components\\Pop.js");
-  reactHotLoader.register(Lists, "Lists", "d:\\git\\demo02\\demo02\\src\\components\\Pop.js");
-  reactHotLoader.register(List, "List", "d:\\git\\demo02\\demo02\\src\\components\\Pop.js");
-  reactHotLoader.register(App, "App", "d:\\git\\demo02\\demo02\\src\\components\\Pop.js");
-  reactHotLoader.register(_default, "default", "d:\\git\\demo02\\demo02\\src\\components\\Pop.js");
+  reactHotLoader.register(Pop, "Pop", "D:\\git\\demo02\\demo02\\src\\components\\Pop.js");
+  reactHotLoader.register(Lists, "Lists", "D:\\git\\demo02\\demo02\\src\\components\\Pop.js");
+  reactHotLoader.register(List, "List", "D:\\git\\demo02\\demo02\\src\\components\\Pop.js");
+  reactHotLoader.register(App, "App", "D:\\git\\demo02\\demo02\\src\\components\\Pop.js");
+  reactHotLoader.register(_default, "default", "D:\\git\\demo02\\demo02\\src\\components\\Pop.js");
 })();
 
 ;

@@ -24,7 +24,7 @@ var __signature__ = typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoader
   return a;
 };
 
-_reactDom.default.render(_react.default.createElement(_reactRouterDom.HashRouter, null, _react.default.createElement("div", null, _react.default.createElement(_Nav.default, null), _react.default.createElement(_reactRouterDom.Switch, null, _react.default.createElement(_reactRouterDom.Route, {
+_reactDom.default.render(_react.default.createElement(_reactRouterDom.HashRouter, null, _react.default.createElement("div", null, _react.default.createElement(_Nav.default, null), _react.default.createElement(_reactRouterDom.Route, {
   exact: true,
   path: "/",
   component: _Pop.default
@@ -36,4 +36,4 @@ _reactDom.default.render(_react.default.createElement(_reactRouterDom.HashRouter
   component: _Res.default
 }), _react.default.createElement(_reactRouterDom.Redirect, {
   to: "/"
-})))), document.getElementById("app"));
+}))), document.getElementById("app"));

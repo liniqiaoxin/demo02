@@ -394,10 +394,10 @@ exports.default = _default2;
     return;
   }
 
-  reactHotLoader.register(Players, "Players", "d:\\git\\demo02\\demo02\\src\\components\\Bat.js");
-  reactHotLoader.register(Instructions, "Instructions", "d:\\git\\demo02\\demo02\\src\\components\\Bat.js");
-  reactHotLoader.register(Bat, "Bat", "d:\\git\\demo02\\demo02\\src\\components\\Bat.js");
-  reactHotLoader.register(_default, "default", "d:\\git\\demo02\\demo02\\src\\components\\Bat.js");
+  reactHotLoader.register(Players, "Players", "D:\\git\\demo02\\demo02\\src\\components\\Bat.js");
+  reactHotLoader.register(Instructions, "Instructions", "D:\\git\\demo02\\demo02\\src\\components\\Bat.js");
+  reactHotLoader.register(Bat, "Bat", "D:\\git\\demo02\\demo02\\src\\components\\Bat.js");
+  reactHotLoader.register(_default, "default", "D:\\git\\demo02\\demo02\\src\\components\\Bat.js");
 })();
 
 ;
