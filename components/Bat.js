@@ -27,6 +27,8 @@ var _axios = _interopRequireDefault(require("axios"));
 
 var _root = require("react-hot-loader/root");
 
+var _reactRouterDom = require("react-router-dom");
+
 (function () {
   var enterModule = typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal.enterModule : undefined;
   enterModule && enterModule(module);
@@ -46,52 +48,39 @@ function (_React$Component) {
 
     (0, _classCallCheck2.default)(this, Players);
     _this = (0, _possibleConstructorReturn2.default)(this, (0, _getPrototypeOf2.default)(Players).call(this, props));
-    (0, _defineProperty2.default)((0, _assertThisInitialized2.default)(_this), "handleGetInputValue", function (event) {
-      var username = event.target.value;
-
-      _this.setState({
-        username: username
-      });
-    });
-    (0, _defineProperty2.default)((0, _assertThisInitialized2.default)(_this), "handlePost", function () {
-      var username = _this.state.username;
-      console.log(username, "------username"); //在此做提交操作，比如发dispatch等
-
-      var transmitDate = _this.props.transmitDate;
-      var url = "https://api.github.com/search/users?q=" + username;
-
-      _axios.default.get(url).then(function (response) {
-        var _response$data$items$ = response.data.items[0],
-            login = _response$data$items$.login,
-            avatar_url = _response$data$items$.avatar_url,
-            id = _response$data$items$.id;
-        var state = {
-          login: login,
-          avatar_url: avatar_url,
-          id: id,
-          click: false
-        };
-
-        _this.setState(state);
-
-        transmitDate(state);
-      });
-
-      event.preventDefault();
-    });
     (0, _defineProperty2.default)((0, _assertThisInitialized2.default)(_this), "onClick", function () {
-      _this.setState({
-        click: true
-      });
+      var username = _this.state.username;
+      if (username === '') return;
+      var url = "https://api.github.com/search/users?q=".concat(username);
 
-      _this.props.empty();
+      _axios.default.get(url).then(function (res) {
+        var data = res && res.data.items[0];
+
+        _this.setState({
+          data: data,
+          click: false
+        }, function () {
+          _this.props.getPlayers(username);
+        });
+      });
+    });
+    (0, _defineProperty2.default)((0, _assertThisInitialized2.default)(_this), "close", function () {
+      _this.setState({
+        click: true,
+        username: ''
+      }, function () {
+        _this.props.getPlayers(_this.state.username);
+      });
+    });
+    (0, _defineProperty2.default)((0, _assertThisInitialized2.default)(_this), "onChange", function (e) {
+      _this.setState({
+        username: e.target.value
+      });
     });
     _this.state = {
-      username: "",
-      login: "",
-      avatar_url: "",
-      id: 0,
-      click: true
+      username: '',
+      click: true,
+      data: {}
     };
     return _this;
   }
@@ -99,6 +88,11 @@ function (_React$Component) {
   (0, _createClass2.default)(Players, [{
     key: "render",
     value: function render() {
+      var _this2 = this;
+
+      var _this$state = this.state,
+          click = _this$state.click,
+          data = _this$state.data;
       var style = {
         input: {
           width: "360px",
@@ -138,51 +132,48 @@ function (_React$Component) {
           alignItems: "center"
         }
       };
-
-      if (this.state.click) {
-        return _react.default.createElement("div", {
-          style: {
-            display: "flex",
-            justifyContent: "space-around"
-          }
-        }, _react.default.createElement("form", {
-          onSubmit: this.handlePost,
-          style: {
-            display: "flex",
-            fontSize: "16px"
-          }
-        }, _react.default.createElement("input", {
-          type: "text",
-          placeholder: "github username",
-          value: this.state.username,
-          onChange: this.handleGetInputValue,
-          style: style.input
-        }), _react.default.createElement("input", {
-          type: "submit",
-          value: "submit",
-          className: "button",
-          style: style.button
-        })));
-      } else {
-        return _react.default.createElement("div", {
-          style: style.play
-        }, _react.default.createElement("div", {
-          style: style.imgp
-        }, _react.default.createElement("img", {
-          src: this.state.avatar_url,
-          style: style.img
-        }), _react.default.createElement("p", {
-          style: {
-            fontSize: "25px"
-          }
-        }, this.state.username)), _react.default.createElement("button", {
-          onClick: this.onClick,
-          style: style.btn
-        }, _react.default.createElement("i", {
-          className: "fa fa-times",
-          "aria-hidden": "true"
-        })));
-      }
+      return _react.default.createElement(_react.default.Fragment, null, click ? _react.default.createElement("div", {
+        style: {
+          display: "flex",
+          justifyContent: "space-around"
+        }
+      }, _react.default.createElement("form", {
+        style: {
+          display: "flex",
+          fontSize: "16px"
+        }
+      }, _react.default.createElement("input", {
+        type: "text",
+        placeholder: "github username",
+        value: this.state.username,
+        onChange: this.onChange,
+        style: style.input
+      }), _react.default.createElement("input", {
+        type: "submit",
+        value: "submit",
+        className: "button",
+        onClick: this.onClick,
+        style: style.button
+      }))) : _react.default.createElement("div", {
+        style: style.play
+      }, _react.default.createElement("div", {
+        style: style.imgp
+      }, _react.default.createElement("img", {
+        src: data.avatar_url,
+        style: style.img
+      }), _react.default.createElement("p", {
+        style: {
+          fontSize: "25px"
+        }
+      }, data.login)), _react.default.createElement("button", {
+        onClick: function onClick() {
+          return _this2.close();
+        },
+        style: style.btn
+      }, _react.default.createElement("i", {
+        className: "fa fa-times",
+        "aria-hidden": "true"
+      }))));
     }
   }, {
     key: "__reactstandin__regenerateByEval",
@@ -300,73 +291,33 @@ function (_React$Component3) {
   (0, _inherits2.default)(Bat, _React$Component3);
 
   function Bat(props) {
-    var _this2;
+    var _this3;
 
     (0, _classCallCheck2.default)(this, Bat);
-    _this2 = (0, _possibleConstructorReturn2.default)(this, (0, _getPrototypeOf2.default)(Bat).call(this, props));
-    (0, _defineProperty2.default)((0, _assertThisInitialized2.default)(_this2), "clickBattle", function () {
-      var _this2$state = _this2.state,
-          player = _this2$state.player,
-          first = _this2$state.first,
-          last = _this2$state.last;
-
-      if (player == "BATTLE" && first.length != 0 && last.length != 0) {
-        _this2.setState({
-          player: "RESET"
-        });
-      } else if (player == "RESET" && first.length != 0 && last.length != 0) {
-        _this2.setState({
-          player: "BATTLE",
-          first: [],
-          last: []
-        });
-      }
+    _this3 = (0, _possibleConstructorReturn2.default)(this, (0, _getPrototypeOf2.default)(Bat).call(this, props));
+    (0, _defineProperty2.default)((0, _assertThisInitialized2.default)(_this3), "playerOne", function (first) {
+      _this3.setState({
+        first: first
+      });
     });
-    (0, _defineProperty2.default)((0, _assertThisInitialized2.default)(_this2), "transmitDate", function (date) {
-      var _this2$state2 = _this2.state,
-          first = _this2$state2.first,
-          last = _this2$state2.last;
-
-      if (first.length == 0 && last.length == 0) {
-        _this2.setState({
-          first: date
-        });
-      } else if (last.length == 0 && first.length != 0) {
-        _this2.setState({
-          last: date
-        });
-      }
+    (0, _defineProperty2.default)((0, _assertThisInitialized2.default)(_this3), "playerTwo", function (last) {
+      _this3.setState({
+        last: last
+      });
     });
-    (0, _defineProperty2.default)((0, _assertThisInitialized2.default)(_this2), "empty", function () {
-      var _this2$state3 = _this2.state,
-          first = _this2$state3.first,
-          last = _this2$state3.last;
-
-      if (first.length != 0 && last.length == 0) {
-        _this2.setState({
-          first: []
-        });
-      } else if (last.length != 0 && first.length != 0) {
-        _this2.setState({
-          last: []
-        });
-      }
-    });
-    _this2.state = {
-      player: "BATTLE",
-      first: [],
-      last: []
+    _this3.state = {
+      first: '',
+      last: ''
     };
-    return _this2;
+    return _this3;
   }
 
   (0, _createClass2.default)(Bat, [{
     key: "render",
     value: function render() {
-      var _this$state = this.state,
-          player = _this$state.player,
-          first = _this$state.first,
-          last = _this$state.last;
+      var _this$state2 = this.state,
+          first = _this$state2.first,
+          last = _this$state2.last;
       var style = {
         btn: {
           display: "flex",
@@ -377,130 +328,47 @@ function (_React$Component3) {
           fontSize: "18px",
           border: "0",
           textAlign: "center"
-        },
-        result: {
-          marginTop: "95px"
-        },
-        resultCard: {
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          width: "200px",
-          backgroundColor: "#e5e5e5"
-        },
-        img: {
-          width: "150px"
-        },
-        p: {
-          fontSize: "18px"
-        },
-        h: {
-          marginTop: "0"
         }
       };
-      console.log("first", first.id);
-      console.log("last", last.id);
-
-      if (player == "BATTLE" || first.length == 0 || last.length == 0) {
-        return _react.default.createElement("div", null, _react.default.createElement("div", null, _react.default.createElement(Instructions, null)), _react.default.createElement("div", {
-          style: {
-            display: "flex",
-            justifyContent: "space-around"
+      console.log(first, last);
+      return _react.default.createElement("div", null, _react.default.createElement("div", null, _react.default.createElement(Instructions, null)), _react.default.createElement("div", {
+        style: {
+          display: "flex",
+          justifyContent: "space-around"
+        }
+      }, _react.default.createElement("div", {
+        style: {
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-around",
+          width: "500px"
+        }
+      }, _react.default.createElement("h3", null, "Player One"), _react.default.createElement(Players, {
+        getPlayers: this.playerOne.bind(this)
+      })), _react.default.createElement("div", {
+        style: {
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-around",
+          width: "500px"
+        }
+      }, _react.default.createElement("h3", null, "Player Two"), _react.default.createElement(Players, {
+        getPlayers: this.playerTwo.bind(this)
+      }))), _react.default.createElement("div", {
+        style: style.btn
+      }, _react.default.createElement("button", {
+        style: style.b,
+        className: first.length == 0 || last.length == 0 ? "hide" : "",
+        onClick: this.clickBattle
+      }, _react.default.createElement(_reactRouterDom.Link, {
+        to: {
+          pathname: '/result',
+          query: {
+            first: first,
+            last: last
           }
-        }, _react.default.createElement("div", {
-          style: {
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "space-around",
-            width: "500px"
-          }
-        }, _react.default.createElement("h3", null, "Player One"), _react.default.createElement(Players, {
-          transmitDate: this.transmitDate,
-          empty: this.empty
-        })), _react.default.createElement("div", {
-          style: {
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "space-around",
-            width: "500px"
-          }
-        }, _react.default.createElement("h3", null, "Player Two"), _react.default.createElement(Players, {
-          transmitDate: this.transmitDate,
-          empty: this.empty
-        }))), _react.default.createElement("div", {
-          style: style.btn
-        }, _react.default.createElement("button", {
-          style: style.b,
-          className: first.length == 0 || last.length == 0 ? "hide" : "",
-          onClick: this.clickBattle
-        }, player)));
-      }
-
-      if (first.id > last.id) {
-        return _react.default.createElement("div", {
-          style: style.result
-        }, _react.default.createElement("div", {
-          style: {
-            display: "flex",
-            justifyContent: "space-around"
-          }
-        }, _react.default.createElement("div", {
-          style: style.resultCard
-        }, _react.default.createElement("h3", null, "Winner"), _react.default.createElement("img", {
-          src: first.avatar_url,
-          style: style.img
-        }), _react.default.createElement("p", {
-          style: style.p
-        }, first.login), _react.default.createElement("h4", {
-          style: style.h
-        }, "score:", first.id)), _react.default.createElement("div", {
-          style: style.resultCard
-        }, _react.default.createElement("h3", null, "Loser"), _react.default.createElement("img", {
-          src: last.avatar_url,
-          style: style.img
-        }), _react.default.createElement("p", {
-          style: style.p
-        }, last.login), _react.default.createElement("h4", {
-          style: style.h
-        }, "score:", last.id))), _react.default.createElement("div", {
-          style: style.btn
-        }, _react.default.createElement("button", {
-          style: style.b,
-          onClick: this.clickBattle
-        }, player)));
-      } else {
-        return _react.default.createElement("div", {
-          style: style.result
-        }, _react.default.createElement("div", {
-          style: {
-            display: "flex",
-            justifyContent: "space-around"
-          }
-        }, _react.default.createElement("div", {
-          style: style.resultCard
-        }, _react.default.createElement("h3", null, "Winner"), _react.default.createElement("img", {
-          src: last.avatar_url,
-          style: style.img
-        }), _react.default.createElement("p", {
-          style: style.p
-        }, last.login), _react.default.createElement("h4", {
-          style: style.h
-        }, "score:", last.id)), _react.default.createElement("div", {
-          style: style.resultCard
-        }, _react.default.createElement("h3", null, "Loser"), _react.default.createElement("img", {
-          src: first.avatar_url,
-          style: style.img
-        }), _react.default.createElement("p", {
-          style: style.p
-        }, first.login), _react.default.createElement("h4", {
-          style: style.h
-        }, "score:", first.id))), _react.default.createElement("div", {
-          style: style.btn
-        }, _react.default.createElement("button", {
-          style: style.b,
-          onClick: this.clickBattle
-        }, player)));
-      }
+        }
+      }, "BATTLE"))));
     }
   }, {
     key: "__reactstandin__regenerateByEval",
@@ -526,10 +394,10 @@ exports.default = _default2;
     return;
   }
 
-  reactHotLoader.register(Players, "Players", "D:\\git\\demo02\\demo02\\src\\components\\Bat.js");
-  reactHotLoader.register(Instructions, "Instructions", "D:\\git\\demo02\\demo02\\src\\components\\Bat.js");
-  reactHotLoader.register(Bat, "Bat", "D:\\git\\demo02\\demo02\\src\\components\\Bat.js");
-  reactHotLoader.register(_default, "default", "D:\\git\\demo02\\demo02\\src\\components\\Bat.js");
+  reactHotLoader.register(Players, "Players", "d:\\git\\demo02\\demo02\\src\\components\\Bat.js");
+  reactHotLoader.register(Instructions, "Instructions", "d:\\git\\demo02\\demo02\\src\\components\\Bat.js");
+  reactHotLoader.register(Bat, "Bat", "d:\\git\\demo02\\demo02\\src\\components\\Bat.js");
+  reactHotLoader.register(_default, "default", "d:\\git\\demo02\\demo02\\src\\components\\Bat.js");
 })();
 
 ;

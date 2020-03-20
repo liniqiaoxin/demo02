@@ -30,7 +30,7 @@ var NavBar = function NavBar() {
   }, _React.default.createElement(_reactRouterDom.NavLink, {
     exact: true,
     to: "/"
-  }, "Popular"), " ", "\xA0", _React.default.createElement(_reactRouterDom.NavLink, {
+  }, "Popular"), " \xA0", _React.default.createElement(_reactRouterDom.NavLink, {
     to: "/Bat"
   }, "Battle")));
 };
@@ -47,8 +47,8 @@ exports.default = _default2;
     return;
   }
 
-  reactHotLoader.register(NavBar, "NavBar", "D:\\git\\demo02\\demo02\\src\\components\\Nav.js");
-  reactHotLoader.register(_default, "default", "D:\\git\\demo02\\demo02\\src\\components\\Nav.js");
+  reactHotLoader.register(NavBar, "NavBar", "d:\\git\\demo02\\demo02\\src\\components\\Nav.js");
+  reactHotLoader.register(_default, "default", "d:\\git\\demo02\\demo02\\src\\components\\Nav.js");
 })();
 
 ;

@@ -10,6 +10,8 @@ var _Pop = _interopRequireDefault(require("./components/Pop"));
 
 var _Bat = _interopRequireDefault(require("./components/Bat"));
 
+var _Res = _interopRequireDefault(require("./components/Res"));
+
 require("font-awesome/css/font-awesome.min.css");
 
 var _reactRouterDom = require("react-router-dom");
@@ -27,8 +29,11 @@ _reactDom.default.render(_react.default.createElement(_reactRouterDom.HashRouter
   path: "/",
   component: _Pop.default
 }), _react.default.createElement(_reactRouterDom.Route, {
-  path: "/Bat",
+  path: "/Battle",
   component: _Bat.default
+}), _react.default.createElement(_reactRouterDom.Route, {
+  path: "/result",
+  component: _Res.default
 }), _react.default.createElement(_reactRouterDom.Redirect, {
   to: "/"
 })))), document.getElementById("app"));
