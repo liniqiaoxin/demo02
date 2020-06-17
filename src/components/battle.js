@@ -1,3 +1,8 @@
+// import React from 'react'
+// export default function About() {
+//   return <div>About组件内容</div>
+// }
+
 import React from "react";
 import axios from "axios";
 import { hot } from "react-hot-loader/root";
@@ -26,6 +31,7 @@ class Players extends React.Component {
     const { transmitDate } = this.props;
     const url = "https://api.github.com/search/users?q=" + username;
     axios.get(url).then(response => {
+      console.log(response.data.items)
       const { login, avatar_url, score } = response.data.items[0];
       const state = {
         login,
@@ -91,7 +97,8 @@ class Players extends React.Component {
             <input
               type="submit"
               value="submit"
-              className="button"
+              disabled={!this.state.username}
+              className={this.state.username ? "button" : ""}
               style={style.button}
             />
           </form>
