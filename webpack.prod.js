@@ -1,13 +1,12 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-// const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 
-module.exports = function ( argv) {
+module.exports = function (env, argv) {
   const isEnvDevelopment = argv.mode === "development" || !argv.mode;
   const isEnvProduction = argv.mode === "production";
 
@@ -18,7 +17,7 @@ module.exports = function ( argv) {
       : isEnvDevelopment && "cheap-module-source-map",
     entry: "./src/index.js",
     output: {
-      // filename: "[name].js",
+      filename: "[name].js",
       filename: '[name].[contenthash:8].js',
       path: path.resolve(__dirname, "dist")
     },
@@ -82,7 +81,7 @@ module.exports = function ( argv) {
       new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
         title: 'Github热门项目',
-        // template: "./public/index.html",
+        template: "./public/index.html",
         template: "./public/index.html",
         minify: {
           removeComments: true,
