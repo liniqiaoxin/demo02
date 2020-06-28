@@ -1,4 +1,4 @@
-
+/* 
 
 
 a {
@@ -32,6 +32,9 @@ button:hover[disabled] {
   cursor: default;
 }
 
+disbutton:hover {
+  cursor: pointer;
+}
 .text-center {
   text-align: center;
 }
@@ -68,4 +71,4 @@ button:hover[disabled] {
 }
 .hide{
   display:none;
-}
+} */

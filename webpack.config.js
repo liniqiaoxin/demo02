@@ -2,7 +2,7 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const webpack = require('webpack');
 
-module.exports = function(env, argv) {
+module.exports = function (env, argv) {
   const isEnvDevelopment = argv.mode === "development" || !argv.mode;
   const isEnvProduction = argv.mode === "production";
 
@@ -17,7 +17,7 @@ module.exports = function(env, argv) {
       path: path.resolve(__dirname, "dist")
     },
     devServer: {
-      historyApiFallback:true,
+      historyApiFallback: true,
       contentBase: './dist',
       hot: true,
     },
@@ -43,7 +43,7 @@ module.exports = function(env, argv) {
           exclude: [path.resolve(__dirname, 'src/styles'), /node_modules/],
           use: ["style-loader", "css-loader?modules", "postcss-loader", "less-loader"]
         },
-       
+
         {
           test: /\.js$/,
           exclude: /node_modules/,
@@ -59,14 +59,20 @@ module.exports = function(env, argv) {
           options: {
             limit: 10000
           }
-        }
+        },
+        {
+          test: /\.js$/,
+          exclude: /node_modules/,
+          enforce: "pre",
+          use: "eslint-loader"
+          },
       ]
     },
     plugins: [
-      
+
       new HtmlWebpackPlugin({
         title: 'Github热门项目',
-        template: "public/index.html"
+        template: "./public/index.html"
       }),
       new webpack.NamedModulesPlugin(),
       new webpack.HotModuleReplacementPlugin()

@@ -1,13 +1,13 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const webpack = require('webpack');
+// const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');  
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 
-module.exports = function(env, argv) {
+module.exports = function ( argv) {
   const isEnvDevelopment = argv.mode === "development" || !argv.mode;
   const isEnvProduction = argv.mode === "production";
 
@@ -18,7 +18,8 @@ module.exports = function(env, argv) {
       : isEnvDevelopment && "cheap-module-source-map",
     entry: "./src/index.js",
     output: {
-      filename: "[name].[contenthash:8].js",
+      // filename: "[name].js",
+      filename: '[name].[contenthash:8].js',
       path: path.resolve(__dirname, "dist")
     },
     module: {
@@ -81,13 +82,25 @@ module.exports = function(env, argv) {
       new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
         title: 'Github热门项目',
-        template: "public/index.html",
-                     
+        // template: "./public/index.html",
+        template: "./public/index.html",
+        minify: {
+          removeComments: true,
+          collapseWhitespace: true,
+          removeRedundantAttributes: true,
+          useShortDoctype: true,
+          removeEmptyAttributes: true,
+          removeStyleLinkTypeAttributes: true,
+          keepClosingSlash: true,
+          minifyJS: true,
+          minifyCSS: true,
+          minifyURLs: true,
+        },
       }),
       new MiniCssExtractPlugin({
         filename: '[name].[contenthash:8].css',
         chunkFilename: '[name].[contenthash:8].chunk.css',
-      }), 
+      }),
       new BundleAnalyzerPlugin(),
     ],
     resolve: {
