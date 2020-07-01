@@ -1,6 +1,26 @@
 import React from "react";
+import zwt from '../../styles/zwt.jpg'
 
 class Cards extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      imageUrl: this.props.list.owner.avatar_url
+    };
+  }
+
+  handleImageLoaded = () => {
+    // this.setState({
+    //   imageUrl: this.props.list.owner.avatar_url
+    // });
+  }
+
+  handleImageErrored = () => {
+    this.setState({
+      imageUrl: zwt
+    });
+  }
+
   render() {
     const { index, list } = this.props;
     return (
@@ -18,7 +38,13 @@ class Cards extends React.Component {
         <div style={{ paddingRight: "24px" }}>
           <h2 className="text-center">#{index}</h2>
           <div className="text-center">
-            <img style={{ width: "50%" }} src={list.owner.avatar_url} alt="" />
+            <img
+              style={{ width: "50%" }}
+              src={this.state.imageUrl}
+              onLoad={this.handleImageLoaded}
+              onError={this.handleImageErrored}
+              alt=""
+            />
           </div>
           <h4
             style={{
