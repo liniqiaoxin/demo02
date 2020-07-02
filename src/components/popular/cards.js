@@ -1,28 +1,40 @@
 import React from "react";
-import zwt from '../../styles/zwt.jpg'
+import zwt from "../assets/zwt.gif";
 
 class Cards extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      imageUrl: this.props.list.owner.avatar_url
+      imageUrl: this.props.list.owner.avatar_url,
+      done: false
+      // zwt :zwt
     };
   }
 
-  handleImageLoaded = () => {
-    // this.setState({
-    //   imageUrl: this.props.list.owner.avatar_url
-    // });
+  componentWillMount() {
+    // 创建一个虚拟图片
+    const img = new Image();
+    // 发出请求，请求图片
+    img.src = this.props.list.owner.avatar_url;
+    // 当图片加载完毕
+    img.onload = () => {
+      this.setState({
+        done: true
+      });
+    };
   }
+
+  handleImageLoaded = () => {};
 
   handleImageErrored = () => {
     this.setState({
       imageUrl: zwt
     });
-  }
+  };
 
   render() {
     const { index, list } = this.props;
+
     return (
       <div
         style={{
@@ -38,13 +50,24 @@ class Cards extends React.Component {
         <div style={{ paddingRight: "24px" }}>
           <h2 className="text-center">#{index}</h2>
           <div className="text-center">
-            <img
+            {this.state.done ? (
+              <img
+                style={{ width: "50%" }}
+                src={this.state.imageUrl}
+                onLoad={this.handleImageLoaded}
+                onError={this.handleImageErrored}
+                alt=""
+              />
+            ) : (
+              <img style={{ width: "50%" }} src={zwt} alt="" />
+            )}
+            {/* <img
               style={{ width: "50%" }}
               src={this.state.imageUrl}
               onLoad={this.handleImageLoaded}
               onError={this.handleImageErrored}
               alt=""
-            />
+            /> */}
           </div>
           <h4
             style={{

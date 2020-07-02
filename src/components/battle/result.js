@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 import { hot } from "react-hot-loader/root";
 import { Link } from "react-router-dom";
+// import zwt from '../assets/zwt.gif'
 
 class Result extends React.Component {
   constructor(props) {
@@ -63,12 +64,46 @@ class Result extends React.Component {
           <div style={{ display: "flex", justifyContent: "space-around" }}>
             <div style={style.resultCard}>
               <h3>Winner</h3>
+              {/* {
+                this.state.doneLast
+                  ? (
+                    <img
+                      style={style.img}
+                      src={first.avatar_url}
+                      alt=""
+                    />
+                  )
+                  : (
+                    <img
+                      style={style.img}
+                      src={zwt}
+                      alt=""
+                    />
+                  )
+              } */}
               <img src={first.avatar_url} style={style.img} alt="" />
               <p style={style.p}>{first.login}</p>
               <h4 style={style.h}>score:{first.public_repos}</h4>
             </div>
             <div style={style.resultCard}>
               <h3>Loser</h3>
+              {/* {
+                this.state.doneFirst
+                  ? (
+                    <img
+                      style={style.img}
+                      src={last.avatar_url}
+                      alt=""
+                    />
+                  )
+                  : (
+                    <img
+                      style={style.img}
+                      src={zwt}
+                      alt=""
+                    />
+                  )
+              } */}
               <img src={last.avatar_url} style={style.img} alt="" />
               <p style={style.p}>{last.login}</p>
               <h4 style={style.h}>score:{last.public_repos}</h4>
@@ -89,12 +124,46 @@ class Result extends React.Component {
         <div style={{ display: "flex", justifyContent: "space-around" }}>
           <div style={style.resultCard}>
             <h3>Winner</h3>
+            {/* {
+              this.state.doneFirst
+                ? (
+                  <img
+                    style={style.img}
+                    src={last.avatar_url}
+                    alt=""
+                  />
+                )
+                : (
+                  <img
+                    style={style.img}
+                    src={zwt}
+                    alt=""
+                  />
+                )
+            } */}
             <img src={last.avatar_url} style={style.img} alt="" />
             <p style={style.p}>{last.login}</p>
             <h4 style={style.h}>score:{last.public_repos}</h4>
           </div>
           <div style={style.resultCard}>
             <h3>Loser</h3>
+            {/* {
+              this.state.doneLast
+                ? (
+                  <img
+                    style={style.img}
+                    src={first.avatar_url}
+                    alt=""
+                  />
+                )
+                : (
+                  <img
+                    style={style.img}
+                    src={zwt}
+                    alt=""
+                  />
+                )
+            } */}
             <img src={first.avatar_url} style={style.img} alt="" />
             <p style={style.p}>{first.login}</p>
             <h4 style={style.h}>score:{first.public_repos}</h4>

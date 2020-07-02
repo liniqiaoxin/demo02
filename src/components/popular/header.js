@@ -29,7 +29,6 @@ export default class Header extends React.Component {
 
   render() {
     const { path } = this.props.match;
-    console.log(this.props.location.pathname);
     return (
       <div>
         <ul

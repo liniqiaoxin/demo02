@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import zwt from "../assets/zwt.gif";
 
 class Players extends React.Component {
   constructor(props) {
@@ -7,12 +8,28 @@ class Players extends React.Component {
     this.state = {
       username: "",
       // login: '',
-      avatarUrl: "",
+      // avatar_url: "",
+      lists: [],
       // score: 0,
       click: true,
-      onLoading: false
+      onLoading: false,
+      done: false
     };
   }
+
+  // componentWillMount() {
+  //   // 创建一个虚拟图片
+  //   const img = new Image();
+  //   // 发出请求，请求图片
+  //   img.src = this.state.lists.avatar_url
+  //   // 当图片加载完毕
+  //   img.onload = () => {
+  //     this.setState({
+  //       done: true
+  //     });
+  //   }
+
+  // }
 
   handleGetInputValue = event => {
     const username = event.target.value;
@@ -27,11 +44,15 @@ class Players extends React.Component {
     const url = `https://api.github.com/users/${username}`;
     try {
       axios.get(url).then(response => {
-        const { login, avatarUrl, publicRrepos } = response.data;
+        const { login } = response.data;
+        this.setState({
+          lists: response.data,
+          done: true
+        });
         const state = {
           login,
-          avatarUrl,
-          publicRrepos,
+          // avatar_url,
+          // publicRrepos,
           click: false
         };
         this.setState(state);
@@ -141,7 +162,12 @@ class Players extends React.Component {
     return (
       <div style={style.play}>
         <div style={style.imgp}>
-          <img src={this.state.avatarUrl} style={style.img} alt="" />
+          {this.state.done ? (
+            <img style={style.img} src={this.state.lists.avatar_url} alt="" />
+          ) : (
+            <img style={style.img} src={zwt} alt="" />
+          )}
+          {/* <img src={this.state.lists.avatar_url} style={style.img} alt="" /> */}
           <p style={{ fontSize: "25px" }}>{this.state.username}</p>
         </div>
 
