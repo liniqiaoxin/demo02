@@ -56,7 +56,11 @@ class Players extends React.Component {
   };
 
   onClick = () => {
-    this.setState({ click: true, onLoading: false });
+    this.setState({
+      click: true,
+      onLoading: false,
+      username: ""
+    });
     this.props.empty();
   };
 
