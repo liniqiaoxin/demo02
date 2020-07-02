@@ -9,7 +9,8 @@ class Players extends React.Component {
       // login: '',
       avatarUrl: "",
       // score: 0,
-      click: true
+      click: true,
+      onLoading: false
     };
   }
 
@@ -19,6 +20,7 @@ class Players extends React.Component {
   };
 
   handlePost = () => {
+    this.setState({ onLoading: true });
     const { username } = this.state;
     // 在此做提交操作，比如发dispatch等
     const { transmitDate } = this.props;
@@ -39,6 +41,7 @@ class Players extends React.Component {
       // alert('该用户名不存在');
     }
     // event.preventDefault();
+    // this.setState({onLoading:false})
   };
 
   changed = event => {
@@ -53,7 +56,7 @@ class Players extends React.Component {
   };
 
   onClick = () => {
-    this.setState({ click: true });
+    this.setState({ click: true, onLoading: false });
     this.props.empty();
   };
 
@@ -94,6 +97,15 @@ class Players extends React.Component {
       imgp: { display: "flex", flexWrap: "nowrap", alignItems: "center" }
     };
     if (this.state.click) {
+      if (this.state.onLoading) {
+        return (
+          <div style={{ display: "flex", justifyContent: "space-around" }}>
+            <div style={{ textAlign: "center" }}>
+              <span>loading...</span>
+            </div>
+          </div>
+        );
+      }
       return (
         <div style={{ display: "flex", justifyContent: "space-around" }}>
           <form
@@ -121,6 +133,7 @@ class Players extends React.Component {
         </div>
       );
     }
+
     return (
       <div style={style.play}>
         <div style={style.imgp}>
