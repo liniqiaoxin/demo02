@@ -67,7 +67,7 @@ function (_React$Component) {
           lastName = _this$state2.lastName;
 
       _this.props.history.push({
-        pathname: "/battle/result/".concat(firstName, "/").concat(lastName)
+        pathname: "/battle/result/?lang1=".concat(firstName, "&lang2=").concat(lastName)
       });
     });
     (0, _defineProperty2.default)((0, _assertThisInitialized2.default)(_this), "transmitDate", function (date) {

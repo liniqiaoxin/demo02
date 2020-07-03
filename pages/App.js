@@ -73,7 +73,7 @@ function (_React$Component) {
         className: "list-group-item",
         to: "/battle"
       }, "Battle")), _react.default.createElement(_reactRouterDom.Switch, null, _react.default.createElement(_reactRouterDom.Route, {
-        path: "/battle/result/:firstName/:lastName",
+        path: "/battle/result/?lang1=:firstName&lang2=:lastName",
         component: _Result.default
       }), _react.default.createElement(_reactRouterDom.Route, {
         path: "/popular",
