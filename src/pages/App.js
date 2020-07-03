@@ -27,7 +27,7 @@ export default class App extends React.Component {
         {/* 可切换的路由组件 */}
         <Switch>
           <Route
-            path="/battle/result/:firstName/:lastName"
+            path="/battle/result/?lang1=:firstName&lang2=:lastName"
             component={Result}
           />
           {/* <Route path="/result/" component={Result} /> */}
