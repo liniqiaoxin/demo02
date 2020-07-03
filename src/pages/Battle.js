@@ -1,7 +1,7 @@
 import React from "react";
 import { hot } from "react-hot-loader/root";
-import Instructions from "./Instructions";
-import Players from "./Players";
+import Players from "@/components/battle/Players";
+import Instructions from "@/components/battle/Instructions";
 
 class Bat extends React.Component {
   constructor(props) {

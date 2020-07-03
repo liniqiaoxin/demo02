@@ -78,9 +78,10 @@ module.exports = function (env, argv) {
       new webpack.HotModuleReplacementPlugin()
     ],
     resolve: {
+      extensions: ['.js', '.jsx', '.json'],
       alias: {
-        '@': path.resolve('src')
+        '@': path.resolve('./src')
       }
-    }
+    },
   };
 };

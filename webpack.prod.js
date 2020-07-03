@@ -7,6 +7,7 @@ const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = function (env, argv) {
+
   const isEnvDevelopment = argv.mode === "development" || !argv.mode;
   const isEnvProduction = argv.mode === "production";
 
@@ -102,11 +103,7 @@ module.exports = function (env, argv) {
       }),
       new BundleAnalyzerPlugin(),
     ],
-    resolve: {
-      alias: {
-        '@': path.resolve('src')
-      }
-    },
+ 
     optimization: {
       minimize: true,
       minimizer: [

@@ -1,13 +1,13 @@
 import React from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 // import Bat from '@/components/battle/battle'
-import Result from "../components/battle/Result";
-import Header from "../components/popular/Header";
-import "../styles/index.less";
-import loadable from "../util/loadable";
-import MyNavLink from "./my-nav-link";
+import Result from "@/components/battle/Result";
+import Header from "@/components/popular/Header";
+import "@/styles/index.less";
+import loadable from "@/util/loadable";
+import MyNavLink from "@/components/popular/my-nav-link";
 
-const Bat = loadable(() => import("@/components/battle/Battle"));
+const Bat = loadable(() => import("./Battle"));
 // const Result = loadable(() => import('@/components/battle/result'))
 
 export default class App extends React.Component {

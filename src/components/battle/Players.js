@@ -70,7 +70,8 @@ class Players extends React.Component {
     if (name === "") {
       return;
     }
-    if (!name.match("^[a-zA-Z0-9_\u4e00-\u9fa5]+$")) {
+    const reg = /^[\u4e00-\u9fa5]+|[a-zA-Z0-9]+$/;
+    if (reg.test(name) === false) {
       alert("请不要输入特殊字符!");
       document.getElementById("inputName").value = "";
     }

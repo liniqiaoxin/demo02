@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 import InfiniteScroll from "react-infinite-scroller";
-import Cards from "./Cards";
+import Cards from "@/components/popular/Cards";
 
 export default class Popular extends React.Component {
   constructor(props) {

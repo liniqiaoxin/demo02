@@ -1,7 +1,7 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
-import MyNavLink from "../../pages/my-nav-link";
-import Popular from "./Popular";
+import Popular from "@/pages/Popular";
+import MyNavLink from "./my-nav-link";
 
 export default class Header extends React.Component {
   constructor(props) {

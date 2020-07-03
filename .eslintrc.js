@@ -20,5 +20,11 @@ module.exports = {
         'react/destructuring-assignment': 0,
         'react/jsx-one-expression-per-line': 0,
         "react/jsx-props-no-spreading": 0,
+        "import/no-unresolved": [
+            2,
+            {
+                "ignore": ["^@/"] // @ 是设置的路径别名
+            },
+        ],
     }
 }
