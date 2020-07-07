@@ -1,5 +1,5 @@
 import React from "react";
-import zwt from "../assets/zwt.jpg";
+import zwt from "@/components/assets/zwt.jpg";
 
 class Cards extends React.Component {
   constructor(props) {

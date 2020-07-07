@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import zwt from "../assets/zwt.gif";
+import zwt from "@/components/assets/zwt.gif";
 
 class Players extends React.Component {
   constructor(props) {
@@ -42,21 +42,27 @@ class Players extends React.Component {
     // 在此做提交操作，比如发dispatch等
     const { transmitDate } = this.props;
     const url = `https://api.github.com/users/${username}`;
+
     try {
       axios.get(url).then(response => {
-        const { login } = response.data;
-        this.setState({
-          lists: response.data,
-          done: true
-        });
-        const state = {
-          login,
-          // avatar_url,
-          // publicRrepos,
-          click: false
-        };
-        this.setState(state);
-        transmitDate(state);
+        console.log(response);
+        if (response.status === 200) {
+          const { login } = response.data;
+          this.setState({
+            lists: response.data,
+            done: true
+          });
+          const state = {
+            login,
+            // avatar_url,
+            // publicRrepos,
+            click: false
+          };
+          this.setState(state);
+          transmitDate(state);
+        } else {
+          alert("无效链接");
+        }
       });
     } catch (e) {
       // alert('该用户名不存在');

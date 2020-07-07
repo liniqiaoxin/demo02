@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 import { hot } from "react-hot-loader/root";
 import { Link } from "react-router-dom";
-// import zwt from '../assets/zwt.gif'
+// import zwt from '../assets/zwt.jpg'
 
 class Result extends React.Component {
   constructor(props) {
@@ -10,10 +10,25 @@ class Result extends React.Component {
     this.state = {
       first: {},
       last: {}
+      // done: true,
+      // firstImageUrl: ''
+      // firstName: this.props.match.params.firstName,
+      // lastName: this.props.match.params.lastName,
     };
   }
 
   async componentDidMount() {
+    // const myhref = window.location.href.split('?')[1].split('&')
+    // console.log('href', window.location.href.split('?')[1].split('&'))
+    // const firstN = myhref[0].split('=')[1]
+    // const lastN = myhref[1].split('=')[1]
+    // console.log(firstN, lastN)
+    // this.setState({
+    //   firstName: firstN,
+    //   lastName: lastN
+    // })
+    // const firstDate = this.state.firstName;
+    // const lastDate = this.state.lastName;
     const firstDate = this.props.match.params.firstName;
     const lastDate = this.props.match.params.lastName;
     const f = await this.getValue(firstDate);
@@ -22,9 +37,19 @@ class Result extends React.Component {
       this.setState({
         first: f.data,
         last: s.data
+        // firstImageUrl:  f.data.avatar_url,
+        // done: false
       });
     }
   }
+
+  // handleImageLoaded = () => { };
+
+  // handleImageErrored = () => {
+  //   this.setState({
+  //     firstImageUrl: zwt
+  //   });
+  // };
 
   getValue = username => {
     const url = `https://api.github.com/users/${username}`;
@@ -81,6 +106,18 @@ class Result extends React.Component {
                     />
                   )
               } */}
+              {/* {this.state.done ? (
+                <img style={{ width: "50%" }} src={zwt} alt="" />
+              ) : (
+                <img
+                  style={style.img}
+                  src={this.state.firstImageUrl}
+                  onLoad={this.handleImageLoaded}
+                  onError={this.handleImageErrored}
+                  alt=""
+                />
+
+                )} */}
               <img src={first.avatar_url} style={style.img} alt="" />
               <p style={style.p}>{first.login}</p>
               <h4 style={style.h}>score:{first.public_repos}</h4>
@@ -164,6 +201,18 @@ class Result extends React.Component {
                   />
                 )
             } */}
+            {/* {this.state.done ? (
+              <img style={{ width: "50%" }} src={zwt} alt="" />
+              ) : (
+                <img
+                  style={style.img}
+                  src={this.state.firstImageUrl}
+                  onLoad={this.handleImageLoaded}
+                  onError={this.handleImageErrored}
+                  alt=""
+                />
+
+                )} */}
             <img src={first.avatar_url} style={style.img} alt="" />
             <p style={style.p}>{first.login}</p>
             <h4 style={style.h}>score:{first.public_repos}</h4>

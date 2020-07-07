@@ -40,15 +40,25 @@ export default class Popular extends React.Component {
   // 模拟发送ajax请求
   search = async (clear = false) => {
     const { query } = this.state;
+    // console.log(query)
     const page = clear ? 1 : this.state.page;
 
     this.setState({ loading: true, load: false });
+    // console.log(query)
+    let url = `https://api.github.com/search/repositories?q=stars:%3E1&sort=stars&order=desc&type=Repositories&page=${page}`;
+    if (query === "All" || query === undefined) {
+      url = `https://api.github.com/search/repositories?q=stars:%3E1&sort=stars&order=desc&type=Repositories&page=${page}`;
+    } else {
+      url = `https://api.github.com/search/repositories?q=stars:%3E1+language:${query}&sort=stars&order=desc&type=Repositories&page=${page}`;
+    }
+
     if (clear) {
       this.setState({ items: [] });
     }
     try {
       const res = await axios.get(
-        `https://api.github.com/search/repositories?q=${query}&sort=stars&order=desc&type=Repositories&page=${page}`
+        url
+        // `https://api.github.com/search/repositories?q=stars:>1+${query}&sort=stars&order=desc&type=Repositories&page=${page}`
       );
       this.setState(state => ({
         items: clear ? res.data.items : [...state.items, ...res.data.items],

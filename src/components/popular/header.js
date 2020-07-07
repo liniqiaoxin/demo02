@@ -1,7 +1,7 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
 import Popular from "@/pages/Popular";
-import MyNavLink from "./my-nav-link";
+import MyNavLink from "@/components/popular/My-nav-link";
 
 export default class Header extends React.Component {
   constructor(props) {
@@ -15,11 +15,11 @@ export default class Header extends React.Component {
     // 模拟发送ajax请求
     setTimeout(() => {
       const data = [
-        { title: "All", query: "stars:>1" },
-        { title: "JavaScript", query: "stars:>1+language:javascript" },
-        { title: "Ruby", query: "stars:>1+language:ruby" },
-        { title: "Java", query: "stars:>1+language:java" },
-        { title: "Css", query: "stars:>1+language:css" }
+        { title: "All", query: "All" },
+        { title: "JavaScript", query: "javascript" },
+        { title: "Ruby", query: "ruby" },
+        { title: "Java", query: "java" },
+        { title: "Css", query: "css" }
       ];
       this.setState({
         messages: data
@@ -42,16 +42,42 @@ export default class Header extends React.Component {
         >
           {this.state.messages.map((m, index) => (
             <li key={index}>
-              <MyNavLink to={`${path}/${m.query}`}>{m.title}</MyNavLink>
-              {/* <a href={`${path}/${m.query}`}>{m.title}</a> */}
+              <MyNavLink
+                to={
+                  // pathname: '/popular',
+                  // search: `?lang=${m.query}`,
+                  `${path}/${m.query}`
+                }
+                query={m.query}
+              >
+                {m.title}
+              </MyNavLink>
+              {/* <a href={`${path}/?lang=${m.query}`}>{m.title}</a> */}
               &nbsp;&nbsp;&nbsp;
             </li>
           ))}
         </ul>
         <hr />
+        {/*         
+        {this.props.location.pathname === "/popular" ? (
+          <Redirect to={{
+            pathname: '/popular',
+            search: `?lang=All`,
+          }}
+          />
+        ) : (
+            ""
+          )}
+        <Route
+          to={{
+          pathname: '/popular?lang=',
+          search: `:query`,
+        }}
+          component={Popular}
+        /> */}
 
         {this.props.location.pathname === "/popular" ? (
-          <Redirect to={`${path}/stars:>1`} />
+          <Redirect to={`${path}/All`} />
         ) : (
           ""
         )}

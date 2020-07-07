@@ -27,7 +27,8 @@ class Bat extends React.Component {
     }
     const { firstName, lastName } = this.state;
     this.props.history.push({
-      pathname: `/battle/result/?lang1=${firstName}&lang2=${lastName}`
+      // pathname: `/battle/result/?lang1=${firstName}&lang2=${lastName}`
+      pathname: `/battle/result/${firstName}/${lastName}`
     });
   };
 

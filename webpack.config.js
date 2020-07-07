@@ -16,6 +16,12 @@ module.exports = function (env, argv) {
       filename: "bundle.js",
       path: path.resolve(__dirname, "dist")
     },
+    resolve: {
+      extensions: ['.js', '.jsx', '.json'],
+      alias: {
+        '@': path.resolve('./src')
+      }
+    },
     devServer: {
       historyApiFallback: true,
       contentBase: './dist',
@@ -77,11 +83,6 @@ module.exports = function (env, argv) {
       new webpack.NamedModulesPlugin(),
       new webpack.HotModuleReplacementPlugin()
     ],
-    resolve: {
-      extensions: ['.js', '.jsx', '.json'],
-      alias: {
-        '@': path.resolve('./src')
-      }
-    },
+    
   };
 };

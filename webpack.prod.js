@@ -103,7 +103,11 @@ module.exports = function (env, argv) {
       }),
       new BundleAnalyzerPlugin(),
     ],
- 
+    resolve: {
+      alias: {
+        '@': path.resolve('src')
+      }
+    },
     optimization: {
       minimize: true,
       minimizer: [
