@@ -60,8 +60,14 @@ class Players extends React.Component {
         this.setState(state);
         transmitDate(state);
       }
-    } catch (e) {
-      alert("该用户名不存在");
+    } catch (error) {
+      if (error.response && error.response.status === 403) {
+        alert(error.message);
+      }
+      if (error.response && error.response.status === 404) {
+        alert(error.message);
+      }
+
       this.setState({
         onLoading: false
       });
