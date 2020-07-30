@@ -92,7 +92,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "66cdbe59bae1425e4e89";
+/******/ 	var hotCurrentHash = "9fa0d703c1bf38440440";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -45203,13 +45203,7 @@ function (_React$Component) {
       }
 
       return componentDidMount;
-    }() // handleImageLoaded = () => { };
-    // handleImageErrored = () => {
-    //   this.setState({
-    //     firstImageUrl: zwt
-    //   });
-    // };
-
+    }()
   }, {
     key: "render",
     value: function render() {
@@ -45672,9 +45666,7 @@ function (_React$Component) {
         return react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("li", {
           key: index
         }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(_components_popular_My_nav_link__WEBPACK_IMPORTED_MODULE_8__["default"], {
-          to: // pathname: '/popular',
-          // search: `?lang=${m.query}`,
-          "".concat(path, "/").concat(m.query),
+          to: "".concat(path, "/").concat(m.query),
           query: m.query
         }, m.title), "\xA0\xA0\xA0");
       })), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("hr", null), this.props.location.pathname === "/popular" ? react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__["Redirect"], {
@@ -45750,7 +45742,7 @@ var __signature__ = typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoader
 function MyNavLink(props) {
   return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["NavLink"], _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0___default()({}, props, {
     activeClassName: "active"
-  })); // return <NavLink {...props} activeStyle={{color: 'red'}} />;
+  }));
 }
 ;
 
@@ -45805,7 +45797,7 @@ var __signature__ = typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoader
 function MyNavLink(props) {
   return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["NavLink"], _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0___default()({}, props, {
     activeClassName: "active"
-  })); // return <NavLink {...props} activeStyle={{color: 'red'}} />;
+  }));
 }
 ;
 
@@ -46147,7 +46139,7 @@ function (_React$Component) {
                 page = clear ? 1 : _this.state.page;
 
                 _this.setState({
-                  loading: true // load: false 
+                  loading: true // load: false
 
                 }); // console.log(query)
 

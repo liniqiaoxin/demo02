@@ -296,19 +296,26 @@ function (_React$Component) {
                 transmitDate(state);
               }
 
-              _context.next = 15;
+              _context.next = 16;
               break;
 
             case 11:
               _context.prev = 11;
               _context.t0 = _context["catch"](4);
-              alert('该用户名不存在');
+
+              if (_context.t0.response && _context.t0.response.status === 403) {
+                alert("获取数据失败");
+              }
+
+              if (_context.t0.response && _context.t0.response.status === 404) {
+                alert("该用户名不存在");
+              }
 
               _this.setState({
                 onLoading: false
               });
 
-            case 15:
+            case 16:
             case "end":
               return _context.stop();
           }
