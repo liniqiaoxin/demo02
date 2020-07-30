@@ -304,11 +304,11 @@ function (_React$Component) {
               _context.t0 = _context["catch"](4);
 
               if (_context.t0.response && _context.t0.response.status === 403) {
-                alert("获取数据失败");
+                alert(_context.t0.message);
               }
 
               if (_context.t0.response && _context.t0.response.status === 404) {
-                alert("该用户名不存在");
+                alert(_context.t0.message);
               }
 
               _this.setState({
