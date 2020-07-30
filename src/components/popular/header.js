@@ -42,14 +42,7 @@ export default class Header extends React.Component {
         >
           {this.state.messages.map((m, index) => (
             <li key={index}>
-              <MyNavLink
-                to={
-                  // pathname: '/popular',
-                  // search: `?lang=${m.query}`,
-                  `${path}/${m.query}`
-                }
-                query={m.query}
-              >
+              <MyNavLink to={`${path}/${m.query}`} query={m.query}>
                 {m.title}
               </MyNavLink>
               {/* <a href={`${path}/?lang=${m.query}`}>{m.title}</a> */}

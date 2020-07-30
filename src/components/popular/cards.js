@@ -61,13 +61,6 @@ class Cards extends React.Component {
             ) : (
               <img style={{ width: "50%" }} src={zwt} alt="" />
             )}
-            {/* <img
-              style={{ width: "50%" }}
-              src={this.state.imageUrl}
-              onLoad={this.handleImageLoaded}
-              onError={this.handleImageErrored}
-              alt=""
-            /> */}
           </div>
           <h4
             style={{

@@ -43,14 +43,6 @@ class Result extends React.Component {
     }
   }
 
-  // handleImageLoaded = () => { };
-
-  // handleImageErrored = () => {
-  //   this.setState({
-  //     firstImageUrl: zwt
-  //   });
-  // };
-
   getValue = username => {
     const url = `https://api.github.com/users/${username}`;
     return new Promise((resolve, reject) => {
@@ -89,58 +81,14 @@ class Result extends React.Component {
           <div style={{ display: "flex", justifyContent: "space-around" }}>
             <div style={style.resultCard}>
               <h3>Winner</h3>
-              {/* {
-                this.state.doneLast
-                  ? (
-                    <img
-                      style={style.img}
-                      src={first.avatar_url}
-                      alt=""
-                    />
-                  )
-                  : (
-                    <img
-                      style={style.img}
-                      src={zwt}
-                      alt=""
-                    />
-                  )
-              } */}
-              {/* {this.state.done ? (
-                <img style={{ width: "50%" }} src={zwt} alt="" />
-              ) : (
-                <img
-                  style={style.img}
-                  src={this.state.firstImageUrl}
-                  onLoad={this.handleImageLoaded}
-                  onError={this.handleImageErrored}
-                  alt=""
-                />
 
-                )} */}
               <img src={first.avatar_url} style={style.img} alt="" />
               <p style={style.p}>{first.login}</p>
               <h4 style={style.h}>score:{first.public_repos}</h4>
             </div>
             <div style={style.resultCard}>
               <h3>Loser</h3>
-              {/* {
-                this.state.doneFirst
-                  ? (
-                    <img
-                      style={style.img}
-                      src={last.avatar_url}
-                      alt=""
-                    />
-                  )
-                  : (
-                    <img
-                      style={style.img}
-                      src={zwt}
-                      alt=""
-                    />
-                  )
-              } */}
+
               <img src={last.avatar_url} style={style.img} alt="" />
               <p style={style.p}>{last.login}</p>
               <h4 style={style.h}>score:{last.public_repos}</h4>
