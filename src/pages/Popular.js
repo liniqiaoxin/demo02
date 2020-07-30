@@ -12,8 +12,8 @@ export default class Popular extends React.Component {
       end: false,
       page: 1,
       // clear: false,
-      query: props.match.params.query,
-      load: false
+      query: props.match.params.query
+      // load: false
     };
   }
 
@@ -43,7 +43,10 @@ export default class Popular extends React.Component {
     // console.log(query)
     const page = clear ? 1 : this.state.page;
 
-    this.setState({ loading: true, load: false });
+    this.setState({
+      loading: true
+      // load: false
+    });
     // console.log(query)
     let url = `https://api.github.com/search/repositories?q=stars:%3E1&sort=stars&order=desc&type=Repositories&page=${page}`;
     if (query === "All" || query === undefined) {
@@ -64,12 +67,15 @@ export default class Popular extends React.Component {
         items: clear ? res.data.items : [...state.items, ...res.data.items],
         page: clear ? 1 : state.page + 1
       }));
-    } catch (e) {
+    } catch (error) {
       // alert("获取数据失败")
+      if (error.response && error.response.status === 403) {
+        alert("获取数据失败");
+      }
       console.log("获取数据失败");
       this.setState({
-        end: true,
-        load: true
+        end: true
+        // load: true
       });
     }
     this.setState({ loading: false });
@@ -77,7 +83,7 @@ export default class Popular extends React.Component {
 
   render() {
     const { items } = this.state;
-    const { loading, end, load } = this.state;
+    const { loading, end } = this.state;
     const lists = items.map((item, key) => (
       <Cards key={key} list={item} index={key + 1} />
     ));
@@ -110,11 +116,11 @@ export default class Popular extends React.Component {
               <span>正在加载...</span>
             </div>
           )}
-          {load && (
+          {/* {load && (
             <div style={{ textAlign: "center", color: "#a70000" }}>
               <span>数据加载失败啦</span>
             </div>
-          )}
+          )} */}
         </InfiniteScroll>
       </div>
     );

@@ -36,7 +36,7 @@ class Players extends React.Component {
     this.setState({ username });
   };
 
-  handlePost = () => {
+  handlePost = async () => {
     this.setState({ onLoading: true });
     const { username } = this.state;
     // 在此做提交操作，比如发dispatch等
@@ -44,28 +44,27 @@ class Players extends React.Component {
     const url = `https://api.github.com/users/${username}`;
 
     try {
-      axios.get(url).then(response => {
-        console.log(response);
-        if (response.status === 200) {
-          const { login } = response.data;
-          this.setState({
-            lists: response.data,
-            done: true
-          });
-          const state = {
-            login,
-            // avatar_url,
-            // publicRrepos,
-            click: false
-          };
-          this.setState(state);
-          transmitDate(state);
-        } else {
-          alert("无效链接");
-        }
-      });
+      const res = await axios.get(url);
+      // axios.get(url).then(response => {
+      // console.log(res);
+      if (res.status === 200) {
+        const { login } = res.data;
+        this.setState({
+          lists: res.data,
+          done: true
+        });
+        const state = {
+          login,
+          click: false
+        };
+        this.setState(state);
+        transmitDate(state);
+      }
     } catch (e) {
-      // alert('该用户名不存在');
+      alert("该用户名不存在");
+      this.setState({
+        onLoading: false
+      });
     }
     // event.preventDefault();
     // this.setState({onLoading:false})

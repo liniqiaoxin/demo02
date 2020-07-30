@@ -13,18 +13,18 @@ export default class Header extends React.Component {
 
   componentDidMount() {
     // 模拟发送ajax请求
-    setTimeout(() => {
-      const data = [
-        { title: "All", query: "All" },
-        { title: "JavaScript", query: "javascript" },
-        { title: "Ruby", query: "ruby" },
-        { title: "Java", query: "java" },
-        { title: "Css", query: "css" }
-      ];
-      this.setState({
-        messages: data
-      });
-    }, 500);
+    // setTimeout(() => {
+    const data = [
+      { title: "All", query: "All" },
+      { title: "JavaScript", query: "javascript" },
+      { title: "Ruby", query: "ruby" },
+      { title: "Java", query: "java" },
+      { title: "Css", query: "css" }
+    ];
+    this.setState({
+      messages: data
+    });
+    // }, 500);
   }
 
   render() {
