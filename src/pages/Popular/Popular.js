@@ -36,10 +36,6 @@ export default class Popular extends React.Component {
     });
   }
 
-  // clicktap = () => {
-  //   this.search(true)
-  // }
-
   // 模拟发送ajax请求
   search = async (clear = false) => {
     // const { query } = this.state;
