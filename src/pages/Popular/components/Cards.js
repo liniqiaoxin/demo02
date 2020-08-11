@@ -1,5 +1,5 @@
 import React from "react";
-import zwt from "@/components/assets/zwt.jpg";
+import zwt from "@/assets/zwt.jpg";
 
 class Cards extends React.Component {
   constructor(props) {
@@ -7,7 +7,6 @@ class Cards extends React.Component {
     this.state = {
       imageUrl: this.props.list.owner.avatar_url,
       done: false
-      // zwt :zwt
     };
   }
 

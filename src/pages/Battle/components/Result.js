@@ -2,7 +2,6 @@ import React from "react";
 import axios from "axios";
 import { hot } from "react-hot-loader/root";
 import { Link } from "react-router-dom";
-// import zwt from '../assets/zwt.jpg'
 
 class Result extends React.Component {
   constructor(props) {
@@ -10,35 +9,20 @@ class Result extends React.Component {
     this.state = {
       first: {},
       last: {}
-      // done: true,
-      // firstImageUrl: ''
-      // firstName: this.props.match.params.firstName,
-      // lastName: this.props.match.params.lastName,
     };
   }
 
   async componentDidMount() {
-    // const myhref = window.location.href.split('?')[1].split('&')
-    // console.log('href', window.location.href.split('?')[1].split('&'))
-    // const firstN = myhref[0].split('=')[1]
-    // const lastN = myhref[1].split('=')[1]
-    // console.log(firstN, lastN)
-    // this.setState({
-    //   firstName: firstN,
-    //   lastName: lastN
-    // })
-    // const firstDate = this.state.firstName;
-    // const lastDate = this.state.lastName;
-    const firstDate = this.props.match.params.firstName;
-    const lastDate = this.props.match.params.lastName;
+    const name = window.location.href.split("=")[1].split("&");
+    const name2 = window.location.href.split("=")[2];
+    const firstDate = name[0];
+    const lastDate = name2;
     const f = await this.getValue(firstDate);
     const s = await this.getValue(lastDate);
     if (f) {
       this.setState({
         first: f.data,
         last: s.data
-        // firstImageUrl:  f.data.avatar_url,
-        // done: false
       });
     }
   }
@@ -109,58 +93,12 @@ class Result extends React.Component {
         <div style={{ display: "flex", justifyContent: "space-around" }}>
           <div style={style.resultCard}>
             <h3>Winner</h3>
-            {/* {
-              this.state.doneFirst
-                ? (
-                  <img
-                    style={style.img}
-                    src={last.avatar_url}
-                    alt=""
-                  />
-                )
-                : (
-                  <img
-                    style={style.img}
-                    src={zwt}
-                    alt=""
-                  />
-                )
-            } */}
             <img src={last.avatar_url} style={style.img} alt="" />
             <p style={style.p}>{last.login}</p>
             <h4 style={style.h}>score:{last.public_repos}</h4>
           </div>
           <div style={style.resultCard}>
             <h3>Loser</h3>
-            {/* {
-              this.state.doneLast
-                ? (
-                  <img
-                    style={style.img}
-                    src={first.avatar_url}
-                    alt=""
-                  />
-                )
-                : (
-                  <img
-                    style={style.img}
-                    src={zwt}
-                    alt=""
-                  />
-                )
-            } */}
-            {/* {this.state.done ? (
-              <img style={{ width: "50%" }} src={zwt} alt="" />
-              ) : (
-                <img
-                  style={style.img}
-                  src={this.state.firstImageUrl}
-                  onLoad={this.handleImageLoaded}
-                  onError={this.handleImageErrored}
-                  alt=""
-                />
-
-                )} */}
             <img src={first.avatar_url} style={style.img} alt="" />
             <p style={style.p}>{first.login}</p>
             <h4 style={style.h}>score:{first.public_repos}</h4>

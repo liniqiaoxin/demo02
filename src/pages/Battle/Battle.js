@@ -1,13 +1,12 @@
 import React from "react";
 import { hot } from "react-hot-loader/root";
-import Players from "@/components/battle/Players";
-import Instructions from "@/components/battle/Instructions";
+import Players from "@/pages/battle/components/Players";
+import Instructions from "@/pages/battle/components/Instructions";
 
 class Bat extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      // player: "BATTLE",
       first: [],
       last: [],
       firstName: "",
@@ -27,8 +26,7 @@ class Bat extends React.Component {
     }
     const { firstName, lastName } = this.state;
     this.props.history.push({
-      // pathname: `/battle/result/?lang1=${firstName}&lang2=${lastName}`
-      pathname: `/battle/result/${firstName}/${lastName}`
+      pathname: `/battle/result/?player1=${firstName}&player2=${lastName}`
     });
   };
 
@@ -73,11 +71,6 @@ class Bat extends React.Component {
       h: { marginTop: "0" }
     };
     const { first, last } = this.state;
-    // const path = {
-    //   pathname: `/result/firstPlayer?${firstName}/lastPlayer?${lastName}`,
-    //   state: { firstName: firstName, lastName: lastName },
-    // };
-    // if (player == "BATTLE" || first.length == 0 || last.length == 0) {
     return (
       <div>
         <div>
@@ -108,9 +101,6 @@ class Bat extends React.Component {
           </div>
         </div>
         <div style={style.btn}>
-          {/* <Link
-            to={path}
-          > */}
           <button
             type="button"
             style={style.b}
@@ -119,7 +109,6 @@ class Bat extends React.Component {
           >
             BATTLE
           </button>
-          {/* </Link> */}
         </div>
       </div>
     );

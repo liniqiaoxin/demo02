@@ -1,13 +1,13 @@
 import React from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 // import Bat from '@/components/battle/battle'
-import Result from "@/components/battle/Result";
-import Header from "@/components/popular/Header";
+import Result from "@/pages/Battle/components/Result";
+import Popular from "@/pages/Popular/Popular";
 import "@/styles/index.less";
 import loadable from "@/util/loadable";
-import MyNavLink from "@/components/popular/my-nav-link";
+import MyNavLink from "@/components/My-nav-link";
 
-const Bat = loadable(() => import("./Battle"));
+const Bat = loadable(() => import("./Battle/Battle"));
 // const Result = loadable(() => import('@/components/battle/result'))
 
 export default class App extends React.Component {
@@ -30,11 +30,8 @@ export default class App extends React.Component {
             path="/battle/result/?lang1=:firstName&lang2=:lastName"
             component={Result}
           /> */}
-          <Route
-            path="/battle/result/:firstName/:lastName"
-            component={Result}
-          />
-          <Route path="/popular" component={Header} />
+          <Route path="/battle/result" component={Result} />
+          <Route path="/popular" component={Popular} />
           <Route path="/battle/" component={Bat} />
 
           <Redirect to="/popular" />

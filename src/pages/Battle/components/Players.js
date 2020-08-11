@@ -1,52 +1,37 @@
 import React from "react";
 import axios from "axios";
-import zwt from "@/components/assets/zwt.gif";
+import "antd/dist/antd.css";
+import zwt from "@/assets/zwt.gif";
 
 class Players extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       username: "",
-      // login: '',
-      // avatar_url: "",
       lists: [],
-      // score: 0,
       click: true,
       onLoading: false,
-      done: false
+      done: false,
+      warningMsg: [],
+      warning: false
     };
   }
 
-  // componentWillMount() {
-  //   // 创建一个虚拟图片
-  //   const img = new Image();
-  //   // 发出请求，请求图片
-  //   img.src = this.state.lists.avatar_url
-  //   // 当图片加载完毕
-  //   img.onload = () => {
-  //     this.setState({
-  //       done: true
-  //     });
-  //   }
-
-  // }
-
   handleGetInputValue = event => {
     const username = event.target.value;
-    this.setState({ username });
+    this.setState({
+      username
+    });
   };
 
   handlePost = async () => {
     this.setState({ onLoading: true });
     const { username } = this.state;
-    // 在此做提交操作，比如发dispatch等
     const { transmitDate } = this.props;
     const url = `https://api.github.com/users/${username}`;
 
     try {
       const res = await axios.get(url);
-      // axios.get(url).then(response => {
-      // console.log(res);
       if (res.status === 200) {
         const { login } = res.data;
         this.setState({
@@ -62,18 +47,27 @@ class Players extends React.Component {
       }
     } catch (error) {
       if (error.response && error.response.status === 403) {
-        alert(error.message);
+        const msg = error.response.data;
+        const warn = Object.values(msg);
+        this.setState({
+          warningMsg: warn[0],
+          warning: true
+        });
       }
       if (error.response && error.response.status === 404) {
-        alert(error.message);
+        const msg = error.response.data;
+        const warn = Object.values(msg);
+        this.setState({
+          warningMsg: warn[0],
+          warning: true
+        });
       }
 
       this.setState({
-        onLoading: false
+        onLoading: false,
+        username: ""
       });
     }
-    // event.preventDefault();
-    // this.setState({onLoading:false})
   };
 
   changed = event => {
@@ -83,8 +77,15 @@ class Players extends React.Component {
     }
     const reg = /^[\u4e00-\u9fa5]+|[a-zA-Z0-9]+$/;
     if (reg.test(name) === false) {
-      alert("请不要输入特殊字符!");
-      document.getElementById("inputName").value = "";
+      this.setState({
+        warningMsg: "请不要输入特殊字符!",
+        warning: true
+      });
+      // document.getElementById("inputName").value = "";
+    } else {
+      this.setState({
+        warning: false
+      });
     }
   };
 
@@ -101,7 +102,7 @@ class Players extends React.Component {
     const style = {
       input: {
         width: "360px",
-        height: "42px",
+        height: "48px",
         marginRight: "20px",
         fontSize: "16px"
       },
@@ -133,6 +134,7 @@ class Players extends React.Component {
       },
       imgp: { display: "flex", flexWrap: "nowrap", alignItems: "center" }
     };
+    const { warningMsg, warning } = this.state;
     if (this.state.click) {
       if (this.state.onLoading) {
         return (
@@ -144,30 +146,36 @@ class Players extends React.Component {
         );
       }
       return (
-        <div style={{ display: "flex", justifyContent: "space-around" }}>
-          <form
-            onSubmit={this.handlePost}
-            style={{ display: "flex", fontSize: "16px" }}
-          >
-            <input
-              id="inputName"
-              onInput={this.changed}
-              type="text"
-              placeholder="github username"
-              value={this.state.username}
-              onChange={this.handleGetInputValue}
-              style={style.input}
-            />
-            <input
-              type="submit"
-              value="submit"
-              disabled={!this.state.username}
-              className={this.state.username ? "button" : "disbutton"}
-              // className="button"
-              style={style.button}
-            />
-          </form>
-        </div>
+        <>
+          <div>
+            <div style={{ display: "flex", justifyContent: "space-around" }}>
+              <form
+                onSubmit={this.handlePost}
+                style={{ display: "flex", fontSize: "16px" }}
+              >
+                <input
+                  id="inputName"
+                  onInput={this.changed}
+                  type="text"
+                  placeholder="github username"
+                  value={this.state.username}
+                  onChange={this.handleGetInputValue}
+                  style={style.input}
+                />
+
+                <input
+                  type="submit"
+                  value="submit"
+                  disabled={!this.state.username}
+                  className={this.state.username ? "button" : "disbutton"}
+                  // className="button"
+                  style={style.button}
+                />
+              </form>
+            </div>
+            {warning ? <p style={{ color: "red" }}>{warningMsg}</p> : ""}
+          </div>
+        </>
       );
     }
 
@@ -179,10 +187,8 @@ class Players extends React.Component {
           ) : (
             <img style={style.img} src={zwt} alt="" />
           )}
-          {/* <img src={this.state.lists.avatar_url} style={style.img} alt="" /> */}
           <p style={{ fontSize: "25px" }}>{this.state.username}</p>
         </div>
-
         <button type="button" onClick={this.onClick} style={style.btn}>
           <i className="fa fa-times" aria-hidden="true" />
         </button>

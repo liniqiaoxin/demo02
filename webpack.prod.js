@@ -1,3 +1,5 @@
+/* eslint-disable prefer-destructuring */
+/* eslint-disable import/no-extraneous-dependencies */
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
@@ -18,7 +20,7 @@ module.exports = function (env, argv) {
       : isEnvDevelopment && "cheap-module-source-map",
     entry: "./src/index.js",
     output: {
-      filename: "[name].js",
+      // filename: "[name].js",
       filename: '[name].[contenthash:8].js',
       path: path.resolve(__dirname, "dist")
     },
@@ -82,7 +84,7 @@ module.exports = function (env, argv) {
       new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
         title: 'Github热门项目',
-        template: "./public/index.html",
+        // template: "./public/index.html",
         template: "./public/index.html",
         minify: {
           removeComments: true,
