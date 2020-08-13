@@ -14,10 +14,10 @@ export default class Popular extends React.Component {
       loading: false,
       // end: false,
       page: 1,
-      // query: 'All',
+      // querys: '',
       warningMsg: [],
       warning: false,
-      messages: [
+      tap: [
         { title: "All", query: "All" },
         { title: "JavaScript", query: "javascript" },
         { title: "Ruby", query: "ruby" },
@@ -28,34 +28,51 @@ export default class Popular extends React.Component {
   }
 
   async componentDidMount() {
-    window.addEventListener("load", () => {
-      this.search(true);
-    });
-    window.addEventListener("hashchange", () => {
-      this.clicktap(this.search(true));
-    });
+    const q = window.location.href.split("=")[1];
+    console.log(q);
+    this.search(true, q);
   }
 
+  //  clicktap = index => {
+  //   console.log("query", index)
+  //   const { tap } = this.state;
+  //   const t = tap[index].query
+  //   console.log('---',t)
+  //   this.setState({
+  //     querys: t
+  //   })
+
+  //   this.search(true);
+  //   // console.log(this.state.querys)
+  // }
+
   // 模拟发送ajax请求
-  search = async (clear = false) => {
-    // const { query } = this.state;
-    // console.log("query", query)
+  search = async (clear = false, q = null) => {
     const page = clear ? 1 : this.state.page;
-    const langs = window.location.href.split("=")[1];
+
+    const { query } = this.state;
+
+    let newQuery = q;
+    if (!q) {
+      newQuery = query;
+    }
+
     this.setState({
       loading: true,
-      warning: false
-      // query: langs
+      warning: false,
+      query: newQuery
     });
+
     if (clear) {
       this.setState({ items: [] });
     }
     let url = `https://api.github.com/search/repositories?q=stars:%3E1&sort=stars&order=desc&type=Repositories&page=${page}`;
-    if (langs === "All" || langs === undefined || langs === null) {
+    if (!newQuery || newQuery === "All") {
       url = `https://api.github.com/search/repositories?q=stars:%3E1&sort=stars&order=desc&type=Repositories&page=${page}`;
     } else {
-      url = `https://api.github.com/search/repositories?q=stars:%3E1+language:${langs}&sort=stars&order=desc&type=Repositories&page=${page}`;
+      url = `https://api.github.com/search/repositories?q=stars:%3E1+language:${newQuery}&sort=stars&order=desc&type=Repositories&page=${page}`;
     }
+
     try {
       const res = await axios.get(url);
       this.setState(state => ({
@@ -65,10 +82,11 @@ export default class Popular extends React.Component {
       }));
     } catch (error) {
       if (error.response && error.response.status === 403) {
-        const msg = error.response.data;
-        const warn = Object.values(msg);
+        const msg =
+          error.response && error.response.data && error.response.data.message;
+
         this.setState({
-          warningMsg: warn[0],
+          warningMsg: msg,
           warning: true
         });
       }
@@ -85,7 +103,8 @@ export default class Popular extends React.Component {
   };
 
   render() {
-    const { items, warningMsg, warning, loading } = this.state;
+    const { tap, items, warningMsg, warning, loading, query } = this.state;
+    // console.log("query===", this.state.querys,window.location.href.split("=")[1])
     const lists = items.map((item, key) => (
       <Cards key={key} list={item} index={key + 1} />
     ));
@@ -93,8 +112,8 @@ export default class Popular extends React.Component {
     if (langs === undefined || langs === "") {
       langs = "All";
     }
-    const list = this.state.messages.map((m, index) => (
-      <li key={index} style={{ marginRight: 15, color: "balck" }}>
+    const list = tap.map(m => (
+      <li key={m.query} style={{ marginRight: 15, color: "balck" }}>
         <MyNavLink
           style={{
             marginRight: 15,
@@ -104,7 +123,8 @@ export default class Popular extends React.Component {
             pathname: "/popular",
             search: `?lang=${m.query}`
           }}
-          onClick={this.clicktap}
+          onClick={() => this.search(true, m.query)}
+          // onKeyDown={this.handleKeyDown}
         >
           {m.title}
         </MyNavLink>
@@ -129,7 +149,7 @@ export default class Popular extends React.Component {
         </div>
         <InfiniteScroll
           initialLoad={false}
-          loadMore={() => this.search(false)}
+          loadMore={() => this.search(false, query)}
           hasMore={!loading && !warning}
           loader={null}
         >
